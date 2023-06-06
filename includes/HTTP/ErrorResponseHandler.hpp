@@ -32,8 +32,10 @@ class Server::ErrorResponseHandler
 		RESPONSE_STATUS_AGAIN
 	};
 
-	ErrorResponseHandler(Server *server, const int request_method,
-						 const int code, const unsigned int timeout_ms);
+	ErrorResponseHandler(Server *server,
+						 const int request_method,
+						 const int code,
+						 const unsigned int timeout_ms);
 	~ErrorResponseHandler();
 
 	int task(void);

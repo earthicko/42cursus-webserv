@@ -8,7 +8,8 @@
  * Bidirectional map with key and value access.
  * The KeyType and valueType must be different
  */
-template <typename KeyType, typename ValueType> class BidiMap
+template <typename KeyType, typename ValueType>
+class BidiMap
 {
   private:
 	typedef std::map<KeyType, ValueType> _KVmap;
@@ -41,8 +42,8 @@ template <typename KeyType, typename ValueType> class BidiMap
 		}
 	}
 	BidiMap(const BidiMap &orig)
-		: _key_to_value_map(orig._key_to_value_map),
-		  _value_to_key_map(orig._value_to_key_map)
+		: _key_to_value_map(orig._key_to_value_map)
+		, _value_to_key_map(orig._value_to_key_map)
 	{
 	}
 	BidiMap &operator=(const BidiMap &orig)

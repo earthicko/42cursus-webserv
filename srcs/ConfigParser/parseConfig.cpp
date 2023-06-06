@@ -43,14 +43,13 @@ void trimComments(std::string &content)
 	std::vector<std::string> lines;
 	splitContentIntoLines(lines, content);
 	content = "";
-	for (std::vector<std::string>::iterator line = lines.begin();
-		 line != lines.end(); line++)
+	for (size_t i = 0; i < lines.size(); i++)
 	{
-		size_t comment_position = line->find(comment_marker);
+		size_t comment_position = lines[i].find(comment_marker);
 		if (comment_position == std::string::npos)
-			content += *line;
+			content += lines[i];
 		else
-			content += getfrontstr(*line, comment_position);
+			content += getfrontstr(lines[i], comment_position);
 		content += "\n";
 	}
 }

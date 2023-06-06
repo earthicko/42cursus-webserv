@@ -2,21 +2,27 @@
 #include <sstream>
 
 ConfigDirective::ConfigDirective(const std::string name)
-	: _name(name), _is_context(false)
+	: _name(name)
+	, _is_context(false)
 {
 }
 
 ConfigDirective::ConfigDirective(const std::string &name,
 								 const std::vector<std::string> &parameters)
-	: _name(name), _parameters(parameters), _is_context(false)
+	: _name(name)
+	, _parameters(parameters)
+	, _is_context(false)
 {
 }
 
 ConfigDirective::ConfigDirective(
-	const std::string &name, const std::vector<std::string> &parameters,
+	const std::string &name,
+	const std::vector<std::string> &parameters,
 	const std::vector<ft::shared_ptr<ConfigDirective> > &directives)
-	: _name(name), _parameters(parameters), _directives(directives),
-	  _is_context(false)
+	: _name(name)
+	, _parameters(parameters)
+	, _directives(directives)
+	, _is_context(false)
 {
 }
 
@@ -25,8 +31,10 @@ ConfigDirective::~ConfigDirective()
 }
 
 ConfigDirective::ConfigDirective(const ConfigDirective &orig)
-	: _name(orig._name), _parameters(orig._parameters),
-	  _directives(orig._directives), _is_context(orig._is_context)
+	: _name(orig._name)
+	, _parameters(orig._parameters)
+	, _directives(orig._directives)
+	, _is_context(orig._is_context)
 {
 }
 
@@ -61,13 +69,15 @@ size_t ConfigDirective::nParameters(void) const
 	return (_parameters.size());
 }
 
-ConfigContext::ConfigContext(const std::string name) : ConfigDirective(name)
+ConfigContext::ConfigContext(const std::string name)
+	: ConfigDirective(name)
 {
 	_is_context = true;
 }
 
 ConfigContext::ConfigContext(
-	const std::string &name, const std::vector<std::string> &parameters,
+	const std::string &name,
+	const std::vector<std::string> &parameters,
 	const std::vector<ft::shared_ptr<ConfigDirective> > &directives)
 	: ConfigDirective(name, parameters, directives)
 {
@@ -78,7 +88,8 @@ ConfigContext::~ConfigContext()
 {
 }
 
-ConfigContext::ConfigContext(const ConfigContext &orig) : ConfigDirective(orig)
+ConfigContext::ConfigContext(const ConfigContext &orig)
+	: ConfigDirective(orig)
 {
 }
 

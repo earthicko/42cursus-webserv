@@ -15,8 +15,9 @@ CGI::Response::~Response()
 }
 
 CGI::Response::Response(const Response &orig)
-	: _header(orig._header), _status_code(orig._status_code),
-	  _response_body(orig._response_body)
+	: _header(orig._header)
+	, _status_code(orig._status_code)
+	, _response_body(orig._response_body)
 {
 }
 
@@ -71,9 +72,8 @@ void CGI::Response::consumeHeader(std::string &buffer)
 
 	const std::string value_part = getbackstr(header_line, colon_pos + 1);
 	std::vector<std::string> values = split(value_part, " ");
-	for (std::vector<std::string>::iterator it = values.begin();
-		 it != values.end(); it++)
-		strtrim(*it, " \t");
+	for (size_t i = 0; i < values.size(); i++)
+		strtrim(values[i], " \t");
 
 	if (!_header.hasValue(name))
 		_header.assign(name, values);

@@ -11,7 +11,8 @@ using namespace HTTP;
 
 const std::string Response::_http_version = "HTTP/1.1";
 
-Response::Response(void) : _logger(async::Logger::getLogger("Response"))
+Response::Response(void)
+	: _logger(async::Logger::getLogger("Response"))
 {
 	initGeneralHeaderFields();
 	initResponseHeaderFields();
@@ -20,14 +21,18 @@ Response::Response(void) : _logger(async::Logger::getLogger("Response"))
 }
 
 Response::Response(Header header)
-	: _header(header), _logger(async::Logger::getLogger("Response"))
+	: _header(header)
+	, _logger(async::Logger::getLogger("Response"))
 {
 }
 
 Response::Response(Response const &other)
-	: _response(other._response), _status_code(other._status_code),
-	  _reason_phrase(other._reason_phrase), _header(other._header),
-	  _body(other._body), _logger(other._logger)
+	: _response(other._response)
+	, _status_code(other._status_code)
+	, _reason_phrase(other._reason_phrase)
+	, _header(other._header)
+	, _body(other._body)
+	, _logger(other._logger)
 {
 }
 
@@ -71,7 +76,7 @@ void Response::makeStatusLine(void)
 
 void Response::makeHeader(void)
 {
-	for (Header::const_iterator it = _header.begin(); it != _header.end(); ++it)
+	for (Header::const_iterator it = _header.begin(); it != _header.end(); it++)
 	{
 		if (it->second.empty())
 			continue;
@@ -79,11 +84,10 @@ void Response::makeHeader(void)
 		std::string to_append(it->first + ": ");
 
 		const std::vector<std::string> &values = _header.getValues(it->first);
-		for (std::vector<std::string>::const_iterator val_it = values.begin();
-			 val_it != values.end(); ++val_it)
+		for (size_t i = 0; i < values.size(); i++)
 		{
-			to_append += *val_it;
-			if (val_it + 1 != values.end())
+			to_append += values[i];
+			if (i + 1 != values.size())
 				to_append += ", ";
 		}
 		to_append += CRLF;
@@ -105,7 +109,7 @@ void Response::alignAutoIndex(size_t minus_len, int to_align)
 
 	const int size[] = {51, 20};
 	int align_size = size[to_align] - minus_len;
-	for (int i = 0; i < align_size; ++i)
+	for (int i = 0; i < align_size; i++)
 		_body.append(" ");
 }
 
@@ -136,7 +140,7 @@ void Response::makeDirectoryListing(const std::string &path,
 
 	dir_stream = ::opendir(path.c_str());
 
-	for (int i = 0; i < 2; ++i)
+	for (int i = 0; i < 2; i++)
 		dir_info = ::readdir(dir_stream);
 	while ((dir_info = ::readdir(dir_stream)) != NULL)
 	{
@@ -147,7 +151,9 @@ void Response::makeDirectoryListing(const std::string &path,
 			if (file_info.st_mode & S_IFDIR)
 				file_name += '/';
 			_body.append("<a href=\"" + file_name + "\">" + file_name + "</a>");
-			strftime(modified_time, sizeof(modified_time), "%d-%b-%Y %R",
+			strftime(modified_time,
+					 sizeof(modified_time),
+					 "%d-%b-%Y %R",
 					 gmtime(&file_info.st_mtimespec.tv_sec));
 			alignAutoIndex(file_name.length(), AUTOINDEX_ALIGN_FILE_NAME);
 			_body.append(modified_time);

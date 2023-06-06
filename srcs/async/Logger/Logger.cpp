@@ -14,15 +14,18 @@ const char *Logger::_level_prefixes[]
 	= {ANSI_RESET, ANSI_RESET, ANSI_BWHITE, ANSI_BYELLOW, ANSI_BRED};
 bool Logger::_active = false;
 
-Logger::Logger(void) : _name(_name_default)
+Logger::Logger(void)
+	: _name(_name_default)
 {
 }
 
-Logger::Logger(const std::string &name) : _name(name)
+Logger::Logger(const std::string &name)
+	: _name(name)
 {
 }
 
-Logger::Logger(const Logger &orig) : _name(orig._name)
+Logger::Logger(const Logger &orig)
+	: _name(orig._name)
 {
 }
 

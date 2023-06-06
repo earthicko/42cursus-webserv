@@ -13,7 +13,8 @@ void WebServer::setTerminationFlag(void)
 void WebServer::parseRequestForEachFd(int port, async::TCPIOProcessor &tcp_proc)
 {
 	for (async::TCPIOProcessor::iterator it = tcp_proc.begin();
-		 it != tcp_proc.end(); it++)
+		 it != tcp_proc.end();
+		 it++)
 	{
 		int client_fd = *it;
 		if (tcp_proc.rdbuf(client_fd).empty())
@@ -68,7 +69,8 @@ void WebServer::parseRequestForEachFd(int port, async::TCPIOProcessor &tcp_proc)
 WebServer::_Servers::iterator WebServer::findNoneNameServer(int port)
 {
 	for (_Servers::iterator it = _servers[port].begin();
-		 it != _servers[port].end(); it++)
+		 it != _servers[port].end();
+		 it++)
 	{
 		if ((*it)->hasServerName() == false)
 			return (it);
@@ -91,7 +93,8 @@ void WebServer::resetRequestBuffer(int port, int client_fd)
 void WebServer::registerRequest(int port, int client_fd, HTTP::Request &request)
 {
 	for (_Servers::iterator it = _servers[port].begin();
-		 it != _servers[port].end(); it++)
+		 it != _servers[port].end();
+		 it++)
 	{
 		try
 		{
@@ -104,7 +107,8 @@ void WebServer::registerRequest(int port, int client_fd, HTTP::Request &request)
 		catch (const HTTP::Server::LocationNotFound &e)
 		{
 			LOG_WARNING(e.what());
-			(*it)->registerErrorResponseHandler(client_fd, request.getMethod(), 404);
+			(*it)->registerErrorResponseHandler(
+				client_fd, request.getMethod(), 404);
 			return;
 		}
 		catch (const HTTP::Server::InvalidRequest &e)
@@ -125,7 +129,8 @@ void WebServer::registerRequest(int port, int client_fd, HTTP::Request &request)
 void WebServer::retrieveResponseForEachFd(int port, _Servers &servers)
 {
 	for (_Servers::iterator server_it = servers.begin();
-		 server_it != servers.end(); server_it++)
+		 server_it != servers.end();
+		 server_it++)
 	{
 		_ServerPtr server = *server_it;
 		server->task();
@@ -160,7 +165,8 @@ void WebServer::disconnect(int port, int client_fd)
 {
 	_request_buffer[port].erase(client_fd);
 	for (_Servers::iterator it = _servers[port].begin();
-		 it != _servers[port].end(); it++)
+		 it != _servers[port].end();
+		 it++)
 	{
 		try
 		{

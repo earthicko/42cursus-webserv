@@ -45,7 +45,8 @@ class FileWriter : public FileIOHandler
 
   public:
 	FileWriter(unsigned int timeout_ms, int fd, const std::string &content);
-	FileWriter(unsigned int timeout_ms, const std::string &path,
+	FileWriter(unsigned int timeout_ms,
+			   const std::string &path,
 			   const std::string &content);
 	virtual ~FileWriter();
 

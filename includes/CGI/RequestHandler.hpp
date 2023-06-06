@@ -48,7 +48,8 @@ class RequestHandler
 	};
 	static const size_t pipeThreshold;
 
-	RequestHandler(const Request &request, const std::string &exec_path,
+	RequestHandler(const Request &request,
+				   const std::string &exec_path,
 				   unsigned int timeout_ms);
 	virtual ~RequestHandler();
 
@@ -70,7 +71,8 @@ class RequestHandlerPipe : public RequestHandler
 	void closeAllPipes(void);
 
   public:
-	RequestHandlerPipe(const Request &request, const std::string &exec_path,
+	RequestHandlerPipe(const Request &request,
+					   const std::string &exec_path,
 					   const unsigned int timeout_ms);
 	virtual ~RequestHandlerPipe();
 
@@ -90,7 +92,8 @@ class RequestHandlerVnode : public RequestHandler
 	int waitReadOutputOperation(void);
 
   public:
-	RequestHandlerVnode(const Request &request, const std::string &exec_path,
+	RequestHandlerVnode(const Request &request,
+						const std::string &exec_path,
 						const unsigned int timeout_ms,
 						const std::string &temp_dir_path);
 	virtual ~RequestHandlerVnode();

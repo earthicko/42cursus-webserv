@@ -5,11 +5,17 @@
 using namespace HTTP;
 
 Server::ErrorResponseHandler::ErrorResponseHandler(
-	Server *server, const int request_method, const int code,
+	Server *server,
+	const int request_method,
+	const int code,
 	const unsigned int timeout_ms)
-	: _request_method(request_method), _server(server),
-	  _status(RESPONSE_STATUS_AGAIN), _code(code), _timeout_ms(timeout_ms),
-	  _reader(NULL), _logger(async::Logger::getLogger("ErrorResponseHandler"))
+	: _request_method(request_method)
+	, _server(server)
+	, _status(RESPONSE_STATUS_AGAIN)
+	, _code(code)
+	, _timeout_ms(timeout_ms)
+	, _reader(NULL)
+	, _logger(async::Logger::getLogger("ErrorResponseHandler"))
 {
 	LOG_DEBUG("ErrorResponseHandler " << code << " timeout " << timeout_ms);
 	if (_server->_error_page_paths.find(_code)

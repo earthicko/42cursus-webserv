@@ -18,7 +18,8 @@ void Server::iterateRequestHandlers(void)
 {
 	for (std::map<int, std::queue<_RequestHandlerPtr> >::iterator it
 		 = _request_handlers.begin();
-		 it != _request_handlers.end(); it++)
+		 it != _request_handlers.end();
+		 it++)
 	{
 		int client_fd = it->first;
 		std::queue<_RequestHandlerPtr> &handlers = it->second;
@@ -51,7 +52,8 @@ void Server::iterateCGIHandlers(void)
 {
 	for (std::map<int, std::queue<_CGIRequestHandlerPtr> >::iterator it
 		 = _cgi_handlers.begin();
-		 it != _cgi_handlers.end(); it++)
+		 it != _cgi_handlers.end();
+		 it++)
 	{
 		int client_fd = it->first;
 		std::queue<_CGIRequestHandlerPtr> &handlers = it->second;
@@ -89,7 +91,8 @@ void Server::iterateErrorHandlers(void)
 {
 	for (std::map<int, std::queue<_ErrorResponseHandlerPtr> >::iterator it
 		 = _error_handlers.begin();
-		 it != _error_handlers.end(); it++)
+		 it != _error_handlers.end();
+		 it++)
 	{
 		int client_fd = it->first;
 		std::queue<_ErrorResponseHandlerPtr> &handlers = it->second;
@@ -114,7 +117,8 @@ void Server::iterateErrorHandlers(void)
 	}
 }
 
-void Server::registerHTTPRequest(int client_fd, const Request &request,
+void Server::registerHTTPRequest(int client_fd,
+								 const Request &request,
 								 const Server::Location &location,
 								 const std::string &resource_path)
 {
@@ -167,7 +171,8 @@ void Server::registerHTTPRequest(int client_fd, const Request &request,
 				<< METHOD[request.getMethod()]);
 }
 
-void Server::registerCGIRequest(int client_fd, const Request &request,
+void Server::registerCGIRequest(int client_fd,
+								const Request &request,
 								const std::string &exec_path,
 								const std::string &resource_path)
 {
@@ -193,7 +198,8 @@ void Server::registerCGIRequest(int client_fd, const Request &request,
 	catch (const std::runtime_error &e)
 	{
 		LOG_WARNING(e.what());
-		registerErrorResponseHandler(client_fd, request.getMethod(),
+		registerErrorResponseHandler(client_fd,
+									 request.getMethod(),
 									 500); // Internal Server Error
 		return;
 	}
@@ -229,7 +235,8 @@ void Server::registerRequest(int client_fd, const Request &request)
 	if (_http_min_version > request.getVersion()
 		|| request.getVersion() > _http_max_version)
 	{
-		registerErrorResponseHandler(client_fd, method,
+		registerErrorResponseHandler(client_fd,
+									 method,
 									 505); // HTTP Version Not Supported
 		return;
 	}
@@ -249,7 +256,8 @@ void Server::registerRequest(int client_fd, const Request &request)
 	if (!location.isAllowedMethod(method))
 	{
 		LOG_INFO("Method " << METHOD[method] << " is not allowed");
-		registerErrorResponseHandler(client_fd, method,
+		registerErrorResponseHandler(client_fd,
+									 method,
 									 405); // Method Not Allowed
 		return;
 	}

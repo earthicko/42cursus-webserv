@@ -5,19 +5,24 @@
 
 namespace ft
 {
-template <typename T> class shared_ptr
+template <typename T>
+class shared_ptr
 {
   private:
 	T *_ptr;
 	size_t *_count;
 
   public:
-	shared_ptr(T *ptr = NULL) : _ptr(ptr), _count(new size_t(1))
+	shared_ptr(T *ptr = NULL)
+		: _ptr(ptr)
+		, _count(new size_t(1))
 	{
 		(*_count) = 1;
 	}
 
-	shared_ptr(const shared_ptr &orig) : _ptr(orig._ptr), _count(orig._count)
+	shared_ptr(const shared_ptr &orig)
+		: _ptr(orig._ptr)
+		, _count(orig._count)
 	{
 		(*_count)++;
 	}

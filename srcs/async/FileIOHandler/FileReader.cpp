@@ -5,12 +5,14 @@
 using namespace async;
 
 FileReader::FileReader(unsigned int timeout_ms, int fd, bool is_fifo)
-	: FileIOHandler(timeout_ms, fd), _is_fifo(is_fifo)
+	: FileIOHandler(timeout_ms, fd)
+	, _is_fifo(is_fifo)
 {
 }
 
 FileReader::FileReader(unsigned int timeout_ms, const std::string &path)
-	: FileIOHandler(timeout_ms, path), _is_fifo(false)
+	: FileIOHandler(timeout_ms, path)
+	, _is_fifo(false)
 {
 }
 

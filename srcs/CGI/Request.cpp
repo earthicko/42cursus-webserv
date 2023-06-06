@@ -9,8 +9,8 @@ const std::string Request::_version = "1.1";
 
 Request::Request(const HTTP::Request &http_req,
 				 const std::string &resource_path)
-	: _message_body(http_req.getBody()),
-	  _logger(async::Logger::getLogger("CGIRequest"))
+	: _message_body(http_req.getBody())
+	, _logger(async::Logger::getLogger("CGIRequest"))
 {
 	for (size_t i = 0; i < META_VARIABLES.size(); i++)
 	{
@@ -48,19 +48,19 @@ Request::Request(const HTTP::Request &http_req,
 	_meta_variables["SERVER_PORT"] = server_port;
 
 	const Header &header = http_req.getHeader();
-	for (Header::const_iterator it = header.begin(); it != header.end(); ++it)
+	for (Header::const_iterator it = header.begin(); it != header.end(); it++)
 	{
 		if (!isProtocolSpecificHeader(it->first))
 			continue;
 
 		const std::string http_meta_variable_name = toHTTPvarname(it->first);
 		std::string value;
-		for (std::vector<std::string>::const_iterator vec_itr
-			 = it->second.begin();
-			 vec_itr != it->second.end(); ++vec_itr)
+
+		const std::vector<std::string> &values = it->second;
+		for (size_t i = 0; i < values.size(); i++)
 		{
-			value += *vec_itr;
-			if (vec_itr + 1 != it->second.end())
+			value += values[i];
+			if (i + 1 != values.size())
 				value += ", ";
 		}
 		addMetaVariable(http_meta_variable_name, value);
@@ -69,7 +69,8 @@ Request::Request(const HTTP::Request &http_req,
 
 	for (std::map<std::string, std::string>::iterator it
 		 = _meta_variables.begin();
-		 it != _meta_variables.end(); it++)
+		 it != _meta_variables.end();
+		 it++)
 		LOG_VERBOSE("CGI metavariable \"" << it->first << "\"=\"" << it->second
 										  << "\"");
 }
@@ -79,18 +80,17 @@ Request::~Request()
 }
 
 Request::Request(const Request &orig)
-	: _meta_variables(orig._meta_variables), _message_body(orig._message_body),
-	  _logger(orig._logger)
+	: _meta_variables(orig._meta_variables)
+	, _message_body(orig._message_body)
+	, _logger(orig._logger)
 {
 }
 
 bool Request::isProtocolSpecificHeader(const std::string &name) const
 {
-	for (std::vector<std::string>::const_iterator it
-		 = NON_PROTOCOL_SPECIFIC_HEADERS.begin();
-		 it != NON_PROTOCOL_SPECIFIC_HEADERS.end(); ++it)
+	for (size_t i = 0; i < NON_PROTOCOL_SPECIFIC_HEADERS.size(); i++)
 	{
-		if (name == *it)
+		if (name == NON_PROTOCOL_SPECIFIC_HEADERS[i])
 			return (false);
 	}
 	return (true);
@@ -101,8 +101,10 @@ std::string Request::toHTTPvarname(const std::string &var_name) const
 	static const std::string prefix = "HTTP_";
 	std::string http_var_name = var_name;
 
-	std::transform(http_var_name.begin(), http_var_name.end(),
-				   http_var_name.begin(), ::toupper);
+	std::transform(http_var_name.begin(),
+				   http_var_name.end(),
+				   http_var_name.begin(),
+				   ::toupper);
 	std::replace(http_var_name.begin(), http_var_name.end(), '-', '_');
 	return (prefix + http_var_name);
 }
@@ -123,7 +125,8 @@ char *const *Request::getEnv(void) const
 	int i = 0;
 	for (std::map<std::string, std::string>::const_iterator it
 		 = _meta_variables.begin();
-		 it != _meta_variables.end(); ++it)
+		 it != _meta_variables.end();
+		 it++)
 	{
 		const std::string &name = it->first;
 		const std::string &value = it->second;

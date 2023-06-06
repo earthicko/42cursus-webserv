@@ -8,7 +8,8 @@ Header::~Header()
 {
 }
 
-Header::Header(const Header &orig) : _values(orig._values)
+Header::Header(const Header &orig)
+	: _values(orig._values)
 {
 }
 
@@ -32,10 +33,10 @@ bool Header::hasValue(const std::string &name, const std::string &value) const
 	if (name_iter == _values.end())
 		return (false);
 
-	for (_list::const_iterator value_iter = name_iter->second.begin();
-		 value_iter != name_iter->second.end(); ++value_iter)
+	const std::vector<std::string> &values = name_iter->second;
+	for (size_t i = 0; i < values.size(); i++)
 	{
-		if (*value_iter == value)
+		if (values[i] == value)
 			return (true);
 	}
 	return (false);
@@ -44,10 +45,10 @@ bool Header::hasValue(const std::string &name, const std::string &value) const
 bool Header::hasValue(const Header::const_iterator &iter,
 					  const std::string &value) const
 {
-	for (_list::const_iterator value_iter = iter->second.begin();
-		 value_iter != iter->second.end(); ++value_iter)
+	const std::vector<std::string> &values = iter->second;
+	for (size_t i = 0; i < values.size(); i++)
 	{
-		if (*value_iter == value)
+		if (values[i] == value)
 			return (true);
 	}
 	return (false);

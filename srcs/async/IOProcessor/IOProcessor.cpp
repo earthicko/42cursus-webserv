@@ -12,7 +12,8 @@ std::vector<IOProcessor *> IOProcessor::_objs;
 const size_t IOProcessor::_buffsize = 2048;
 static const timespec zerosec = {0, 0};
 
-IOProcessor::IOProcessor(void) : _status(status::OK_BEGIN)
+IOProcessor::IOProcessor(void)
+	: _status(status::OK_BEGIN)
 {
 	initializeKQueue();
 	registerObject(this);
@@ -44,16 +45,14 @@ void IOProcessor::unregisterObject(IOProcessor *obj)
 
 void IOProcessor::doAllTasks(void)
 {
-	for (std::vector<IOProcessor *>::iterator it = _objs.begin();
-		 it != _objs.end(); it++)
-		(*it)->task();
+	for (size_t i = 0; i < _objs.size(); i++)
+		_objs[i]->task();
 }
 
 void IOProcessor::blockingWriteAll(void)
 {
-	for (std::vector<IOProcessor *>::iterator it = _objs.begin();
-		 it != _objs.end(); it++)
-		(*it)->blockingWrite();
+	for (size_t i = 0; i < _objs.size(); i++)
+		_objs[i]->blockingWrite();
 }
 
 void IOProcessor::initializeKQueue(void)
@@ -145,7 +144,8 @@ const std::string &IOProcessor::errorMsg(void) const
 void IOProcessor::blockingWrite(void)
 {
 	for (std::map<int, std::string>::iterator it = _wrbuf.begin();
-		 it != _wrbuf.end(); it++)
+		 it != _wrbuf.end();
+		 it++)
 	{
 		while (!it->second.empty())
 			task();

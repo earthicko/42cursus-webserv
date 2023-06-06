@@ -7,8 +7,8 @@ Server::RequestGetHandler::RequestGetHandler(Server *server,
 											 const Request &request,
 											 const Server::Location &location,
 											 const std::string &resource_path)
-	: RequestHandler(server, request, location, resource_path),
-	  _reader(_server->_timeout_ms, _resource_path)
+	: RequestHandler(server, request, location, resource_path)
+	, _reader(_server->_timeout_ms, _resource_path)
 {
 }
 

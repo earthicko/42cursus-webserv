@@ -53,10 +53,8 @@ const std::pair<std::string, std::string> _MIME_TYPE[] = {
 	std::pair<std::string, std::string>("kmz",
 										"application/vnd.google-earth.kmz"),
 	std::pair<std::string, std::string>("xls", "application/vnd.ms-excel"),
-	std::pair<std::string, std::string>("eot",
-										"application/vnd.ms-fontobject"),
-	std::pair<std::string, std::string>("ppt",
-										"application/vnd.ms-powerpoint"),
+	std::pair<std::string, std::string>("eot", "application/vnd.ms-fontobject"),
+	std::pair<std::string, std::string>("ppt", "application/vnd.ms-powerpoint"),
 	std::pair<std::string, std::string>(
 		"odg", "application/vnd.oasis.opendocument.graphics"),
 	std::pair<std::string, std::string>(
@@ -69,12 +67,18 @@ const std::pair<std::string, std::string> _MIME_TYPE[] = {
 		"pptx",
 		"application/"
 		"vnd.openxmlformats-officedocument.presentationml.presentation"),
-	std::pair<std::string, std::string>("xlsx", "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
-	std::pair<std::string, std::string>("docx", "application/vnd.openxmlformats-officedocument.wordprocessingml.document"),
+	std::pair<std::string, std::string>(
+		"xlsx",
+		"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"),
+	std::pair<std::string, std::string>(
+		"docx",
+		"application/"
+		"vnd.openxmlformats-officedocument.wordprocessingml.document"),
 	std::pair<std::string, std::string>("wmlc", "application/vnd.wap.wmlc"),
 	std::pair<std::string, std::string>("7z", "application/x-7z-compressed"),
 	std::pair<std::string, std::string>("cco", "application/x-cocoa"),
-	std::pair<std::string, std::string>("jardiff", "application/x-java-archive-diff"),
+	std::pair<std::string, std::string>("jardiff",
+										"application/x-java-archive-diff"),
 	std::pair<std::string, std::string>("jnlp", "application/x-java-jnlp-file"),
 	std::pair<std::string, std::string>("run", "application/x-makeself"),
 	std::pair<std::string, std::string>("pl", "application/x-perl"),
@@ -82,7 +86,8 @@ const std::pair<std::string, std::string> _MIME_TYPE[] = {
 	std::pair<std::string, std::string>("prc", "application/x-pilot"),
 	std::pair<std::string, std::string>("pdb", "application/x-pilot"),
 	std::pair<std::string, std::string>("rar", "application/x-rar-compressed"),
-	std::pair<std::string, std::string>("rpm", "application/x-redhat-package-manager"),
+	std::pair<std::string, std::string>("rpm",
+										"application/x-redhat-package-manager"),
 	std::pair<std::string, std::string>("sea", "application/x-sea"),
 	std::pair<std::string, std::string>("swf", "application/x-shockwave-flash"),
 	std::pair<std::string, std::string>("sit", "application/x-stuffit"),

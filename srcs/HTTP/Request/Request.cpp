@@ -7,8 +7,10 @@
 using namespace HTTP;
 
 Request::Request(void)
-	: _method(METHOD_NONE), _current_state(PARSE_STATE_STARTLINE),
-	  _content_length(0), _logger(async::Logger::getLogger("Request"))
+	: _method(METHOD_NONE)
+	, _current_state(PARSE_STATE_STARTLINE)
+	, _content_length(0)
+	, _logger(async::Logger::getLogger("Request"))
 {
 }
 
@@ -17,10 +19,14 @@ Request::~Request()
 }
 
 Request::Request(const Request &orig)
-	: _method(orig._method), _uri(orig._uri), _version(orig._version),
-	  _header(orig._header), _body(orig._body),
-	  _current_state(orig._current_state),
-	  _content_length(orig._content_length), _logger(orig._logger)
+	: _method(orig._method)
+	, _uri(orig._uri)
+	, _version(orig._version)
+	, _header(orig._header)
+	, _body(orig._body)
+	, _current_state(orig._current_state)
+	, _content_length(orig._content_length)
+	, _logger(orig._logger)
 {
 }
 

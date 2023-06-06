@@ -8,7 +8,8 @@ int main(void)
 	{
 		async::IOProcessor::doAllTasks();
 		for (async::TCPIOProcessor::iterator it = listener.begin();
-			 it != listener.end(); it++)
+			 it != listener.end();
+			 it++)
 		{
 			int fd = *it;
 			if (listener.rdbuf(fd).length() == 0)

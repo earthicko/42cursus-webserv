@@ -18,8 +18,9 @@ static const std::pair<std::string, int> _METHOD[]
 	   std::pair<std::string, int>("PUT", METHOD_PUT),
 	   std::pair<std::string, int>("DELETE", METHOD_DELETE)};
 
-const BidiMap<std::string, int> HTTP::METHOD(_METHOD, sizeof(_METHOD)
-														  / sizeof(_METHOD[0]));
+const BidiMap<std::string, int> HTTP::METHOD(_METHOD,
+											 sizeof(_METHOD)
+												 / sizeof(_METHOD[0]));
 
 // status code
 static const std::pair<int, std::string> _STATUS_CODE[] = {

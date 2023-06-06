@@ -8,11 +8,13 @@ const Logger::EndMarker async::info(Logger::INFO);
 const Logger::EndMarker async::warning(Logger::WARNING);
 const Logger::EndMarker async::error(Logger::ERROR);
 
-Logger::EndMarker::EndMarker(int _level) : level(_level)
+Logger::EndMarker::EndMarker(int _level)
+	: level(_level)
 {
 }
 
-Logger::EndMarker::EndMarker(const Logger::EndMarker &orig) : level(orig.level)
+Logger::EndMarker::EndMarker(const Logger::EndMarker &orig)
+	: level(orig.level)
 {
 }
 

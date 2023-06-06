@@ -41,12 +41,11 @@ void Request::parseHeaderHandleTransferEncodingChunked(void)
 		if (_trailer_values.empty())
 			throw(HTTP::EmptyLineFound());
 
-		for (std::vector<std::string>::const_iterator iter
-			 = _trailer_values.begin();
-			 iter != _trailer_values.end(); ++iter)
+		for (size_t i = 0; i < _trailer_values.size(); i++)
 		{
-			if (*iter == "Trailer" || *iter == "Content-Length"
-				|| *iter == "Transfer-Encoding")
+			if (_trailer_values[i] == "Trailer"
+				|| _trailer_values[i] == "Content-Length"
+				|| _trailer_values[i] == "Transfer-Encoding")
 				throw(HTTP::InvalidField());
 		}
 		LOG_VERBOSE("header has Trailer");

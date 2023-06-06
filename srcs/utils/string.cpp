@@ -5,7 +5,7 @@
 
 bool hasSpace(const std::string &str)
 {
-	for (size_t i = 0; str[i]; ++i)
+	for (size_t i = 0; str[i]; i++)
 		if (std::isspace(str[i]))
 			return (true);
 	return (false);
@@ -18,7 +18,7 @@ bool isHTTPSpace(const char c)
 
 bool isUnsignedIntStr(const std::string &str)
 {
-	for (std::string::const_iterator it = str.begin(); it != str.end(); ++it)
+	for (std::string::const_iterator it = str.begin(); it != str.end(); it++)
 		if (std::isdigit(*it) == false)
 			return (false);
 	return (true);
@@ -33,7 +33,7 @@ void passLWS(std::string &str)
 	{
 		if (str[after_lws] != 's' || str[after_lws] != '\t')
 			break;
-		++after_lws;
+		after_lws++;
 	}
 	trimfrontstr(str, after_lws);
 }
@@ -59,7 +59,8 @@ std::vector<std::string> split(const std::string &s, const char c)
 	return (words);
 }
 
-static size_t _findFirstSep(const std::string &s, const std::string &sep,
+static size_t _findFirstSep(const std::string &s,
+							const std::string &sep,
 							size_t offset)
 {
 	while (offset < s.length())
@@ -98,11 +99,11 @@ void strtrim(std::string &str, const std::string &charset)
 
 	start = 0;
 	while (start < str.length() && strchr(charset.c_str(), str[start]))
-		++start;
+		start++;
 	trimfrontstr(str, start);
 	offset = 0;
 	while (offset < str.length() && !strchr(charset.c_str(), str[offset]))
-		++offset;
+		offset++;
 	trimbackstr(str, offset);
 }
 

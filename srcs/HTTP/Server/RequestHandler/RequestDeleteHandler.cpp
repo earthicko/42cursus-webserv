@@ -5,7 +5,9 @@
 using namespace HTTP;
 
 Server::RequestDeleteHandler::RequestDeleteHandler(
-	Server *server, const Request &request, const Server::Location &location,
+	Server *server,
+	const Request &request,
+	const Server::Location &location,
 	const std::string &resource_path)
 	: RequestHandler(server, request, location, resource_path)
 {

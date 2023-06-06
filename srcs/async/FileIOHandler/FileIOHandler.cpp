@@ -35,16 +35,28 @@ static clock_t msToClockT(const unsigned int ms)
 }
 
 FileIOHandler::FileIOHandler(unsigned int timeout_ms, int fd)
-	: _processor(NULL), _stream(NULL), _fd(fd), _path(""),
-	  _status(status::OK_BEGIN), _buffer(""), _timeout(msToClockT(timeout_ms)),
-	  _next_timeout(clock() + _timeout), _should_close(false)
+	: _processor(NULL)
+	, _stream(NULL)
+	, _fd(fd)
+	, _path("")
+	, _status(status::OK_BEGIN)
+	, _buffer("")
+	, _timeout(msToClockT(timeout_ms))
+	, _next_timeout(clock() + _timeout)
+	, _should_close(false)
 {
 }
 
 FileIOHandler::FileIOHandler(unsigned int timeout_ms, const std::string &path)
-	: _processor(NULL), _stream(NULL), _fd(-1), _path(path),
-	  _status(status::OK_BEGIN), _buffer(""), _timeout(msToClockT(timeout_ms)),
-	  _next_timeout(clock() + _timeout), _should_close(true)
+	: _processor(NULL)
+	, _stream(NULL)
+	, _fd(-1)
+	, _path(path)
+	, _status(status::OK_BEGIN)
+	, _buffer("")
+	, _timeout(msToClockT(timeout_ms))
+	, _next_timeout(clock() + _timeout)
+	, _should_close(true)
 {
 }
 

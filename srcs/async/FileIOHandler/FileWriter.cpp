@@ -3,15 +3,19 @@
 
 using namespace async;
 
-FileWriter::FileWriter(unsigned int timeout_ms, int fd,
+FileWriter::FileWriter(unsigned int timeout_ms,
+					   int fd,
 					   const std::string &content)
-	: FileIOHandler(timeout_ms, fd), _content(content)
+	: FileIOHandler(timeout_ms, fd)
+	, _content(content)
 {
 }
 
-FileWriter::FileWriter(unsigned int timeout_ms, const std::string &path,
+FileWriter::FileWriter(unsigned int timeout_ms,
+					   const std::string &path,
 					   const std::string &content)
-	: FileIOHandler(timeout_ms, path), _content(content)
+	: FileIOHandler(timeout_ms, path)
+	, _content(content)
 {
 }
 

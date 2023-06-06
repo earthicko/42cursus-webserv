@@ -14,7 +14,8 @@ SingleIOProcessor::SingleIOProcessor()
 }
 
 SingleIOProcessor::SingleIOProcessor(const int fd, const int event_option)
-	: _fd(fd), _event_option(event_option)
+	: _fd(fd)
+	, _event_option(event_option)
 {
 	int result = fcntl(_fd, F_SETFL, O_NONBLOCK);
 	if (result < 0)

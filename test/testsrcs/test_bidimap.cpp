@@ -1,7 +1,7 @@
 #include "BidiMap.hpp"
 #include <iostream>
-#include <string>
 #include <map>
+#include <string>
 
 int main()
 {

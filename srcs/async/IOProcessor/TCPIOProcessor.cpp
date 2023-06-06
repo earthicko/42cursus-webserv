@@ -11,8 +11,9 @@ using namespace async;
 std::queue<int> TCPIOProcessor::disconnected_clients;
 
 TCPIOProcessor::TCPIOProcessor(const int port, const int backlog)
-	: _port(port), _backlog_size(backlog),
-	  _logger(Logger::getLogger("TCPIOProcessor"))
+	: _port(port)
+	, _backlog_size(backlog)
+	, _logger(Logger::getLogger("TCPIOProcessor"))
 {
 	int result;
 	_listening_socket = socket(PF_INET, SOCK_STREAM, 0);
@@ -20,8 +21,8 @@ TCPIOProcessor::TCPIOProcessor(const int port, const int backlog)
 		throw(std::runtime_error(std::string("Error while creating socket: ")
 								 + strerror(errno)));
 	int option = 1;
-	setsockopt(_listening_socket, SOL_SOCKET, SO_REUSEADDR, &option,
-			   sizeof(option));
+	setsockopt(
+		_listening_socket, SOL_SOCKET, SO_REUSEADDR, &option, sizeof(option));
 	LOG_INFO("Created socket " << _listening_socket);
 
 	struct sockaddr_in addr;
@@ -29,7 +30,8 @@ TCPIOProcessor::TCPIOProcessor(const int port, const int backlog)
 	addr.sin_family = AF_INET;
 	addr.sin_addr.s_addr = htonl(INADDR_ANY);
 	addr.sin_port = htons(_port);
-	result = bind(_listening_socket, (struct sockaddr *)&addr,
+	result = bind(_listening_socket,
+				  (struct sockaddr *)&addr,
 				  sizeof(struct sockaddr_in));
 	if (result < 0)
 		finalize(strerror(errno));
@@ -193,7 +195,8 @@ TCPIOProcessor::fdIterator::~fdIterator()
 {
 }
 
-TCPIOProcessor::fdIterator::fdIterator(const fdIterator &orig) : _it(orig._it)
+TCPIOProcessor::fdIterator::fdIterator(const fdIterator &orig)
+	: _it(orig._it)
 {
 }
 

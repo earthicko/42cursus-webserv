@@ -53,7 +53,8 @@ void printResult(const std::string &name, const std::string &result)
 		std::cout << "<h1>Welcome, " << name << "!</h1>\n";
 	else
 		std::cout << "<h1>Welcome!</h1>\n";
-	std::cout << "<img src=\"../fortune/img/fortune_cookie_image.jpg\" alt=\"Fortune Cookie "
+	std::cout << "<img src=\"../fortune/img/fortune_cookie_image.jpg\" "
+				 "alt=\"Fortune Cookie "
 				 "Image\">\n";
 	std::cout << "<h1>Your Fortune : " << result << "</h1>\n";
 	std::cout << "</body>\n";

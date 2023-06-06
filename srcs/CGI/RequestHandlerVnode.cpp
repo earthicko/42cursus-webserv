@@ -13,15 +13,15 @@ RequestHandlerVnode::RequestHandlerVnode(const Request &request,
 										 const std::string &exec_path,
 										 const unsigned int timeout_ms,
 										 const std::string &temp_dir_path)
-	: RequestHandler(request, exec_path, timeout_ms),
-	  _input_file_path(temp_dir_path + "/"
-					   + generateHash(toStr(clock()) + "input")),
-	  _output_file_path(temp_dir_path + "/"
-						+ generateHash(toStr(clock()) + "output")),
-	  _timeout_ms(timeout_ms)
+	: RequestHandler(request, exec_path, timeout_ms)
+	, _input_file_path(temp_dir_path + "/"
+					   + generateHash(toStr(clock()) + "input"))
+	, _output_file_path(temp_dir_path + "/"
+						+ generateHash(toStr(clock()) + "output"))
+	, _timeout_ms(timeout_ms)
 {
-	_writer = new async::FileWriter(_timeout_ms, _input_file_path,
-									_request.getMessageBody());
+	_writer = new async::FileWriter(
+		_timeout_ms, _input_file_path, _request.getMessageBody());
 	LOG_VERBOSE("CGI input file: " << _input_file_path);
 	LOG_VERBOSE("CGI output file: " << _output_file_path);
 }

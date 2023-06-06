@@ -32,7 +32,8 @@ class Server::RequestHandler
 		RESPONSE_STATUS_ERROR
 	};
 
-	RequestHandler(Server *server, const Request &request,
+	RequestHandler(Server *server,
+				   const Request &request,
 				   const Server::Location &location,
 				   const std::string &resource_path);
 	virtual ~RequestHandler();
@@ -52,7 +53,8 @@ class Server::RequestGetHandler : public Server::RequestHandler
 	async::FileReader _reader;
 
   public:
-	RequestGetHandler(Server *server, const Request &request,
+	RequestGetHandler(Server *server,
+					  const Request &request,
 					  const Server::Location &location,
 					  const std::string &resource_path);
 	virtual ~RequestGetHandler();
@@ -66,7 +68,8 @@ class Server::RequestHeadHandler : public Server::RequestHandler
 	async::FileReader _reader;
 
   public:
-	RequestHeadHandler(Server *server, const Request &request,
+	RequestHeadHandler(Server *server,
+					   const Request &request,
 					   const Server::Location &location,
 					   const std::string &resource_path);
 	virtual ~RequestHeadHandler();
@@ -80,7 +83,8 @@ class Server::RequestPostHandler : public Server::RequestHandler
 	async::FileWriter _writer;
 
   public:
-	RequestPostHandler(Server *server, const Request &request,
+	RequestPostHandler(Server *server,
+					   const Request &request,
 					   const Server::Location &location,
 					   const std::string &resource_path);
 	virtual ~RequestPostHandler();
@@ -94,7 +98,8 @@ class Server::RequestPutHandler : public Server::RequestHandler
 	async::FileWriter _writer;
 
   public:
-	RequestPutHandler(Server *server, const Request &request,
+	RequestPutHandler(Server *server,
+					  const Request &request,
 					  const Server::Location &location,
 					  const std::string &resource_path);
 	virtual ~RequestPutHandler();
@@ -105,7 +110,8 @@ class Server::RequestPutHandler : public Server::RequestHandler
 class Server::RequestDeleteHandler : public Server::RequestHandler
 {
   public:
-	RequestDeleteHandler(Server *server, const Request &request,
+	RequestDeleteHandler(Server *server,
+						 const Request &request,
 						 const Server::Location &location,
 						 const std::string &resource_path);
 	virtual ~RequestDeleteHandler();

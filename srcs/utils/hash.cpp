@@ -8,10 +8,10 @@ std::string generateHash(const std::string &input)
 	std::string hash(HASH_LEN, '0');
 	unsigned long simpleHash = 0;
 
-	for (size_t i = 0; i < input.size(); ++i)
+	for (size_t i = 0; i < input.size(); i++)
 		simpleHash = input[i] + (simpleHash << 5) - simpleHash;
 
-	for (size_t i = 0; i < HASH_LEN; ++i)
+	for (size_t i = 0; i < HASH_LEN; i++)
 	{
 		hash[i] = digits[simpleHash % digits.size()];
 		simpleHash /= digits.size();

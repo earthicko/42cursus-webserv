@@ -7,8 +7,8 @@ Server::RequestPutHandler::RequestPutHandler(Server *server,
 											 const Request &request,
 											 const Server::Location &location,
 											 const std::string &resource_path)
-	: RequestHandler(server, request, location, resource_path),
-	  _writer(_server->_timeout_ms, _resource_path, request.getBody())
+	: RequestHandler(server, request, location, resource_path)
+	, _writer(_server->_timeout_ms, _resource_path, request.getBody())
 {
 	if (!location.uploadAllowed())
 	{

@@ -40,8 +40,8 @@ RequestHandlerPipe::RequestHandlerPipe(const Request &request,
 	LOG_DEBUG("write_pipe[1]: " << _write_pipe_fd[1]);
 
 	if (_request.getMessageBody().length() > 0)
-		_writer = new async::FileWriter(timeout_ms, _write_pipe_fd[1],
-										_request.getMessageBody());
+		_writer = new async::FileWriter(
+			timeout_ms, _write_pipe_fd[1], _request.getMessageBody());
 	_reader = new async::FileReader(timeout_ms, _read_pipe_fd[0], true);
 }
 

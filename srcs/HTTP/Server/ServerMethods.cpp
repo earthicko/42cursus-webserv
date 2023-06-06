@@ -24,7 +24,8 @@ bool Server::isForMe(const Request &request) const
 	const std::string &host = request.getHeaderValue("Host", 0);
 	LOG_VERBOSE("Request is for host \"" << host << "\"");
 	for (std::set<std::string>::iterator it = _server_name.begin();
-		 it != _server_name.end(); it++)
+		 it != _server_name.end();
+		 it++)
 	{
 		if (*it == host)
 		{
@@ -57,7 +58,8 @@ int Server::hasResponses(void) const
 {
 	for (std::map<int, std::queue<Response> >::const_iterator it
 		 = _output_queue.begin();
-		 it != _output_queue.end(); it++)
+		 it != _output_queue.end();
+		 it++)
 	{
 		if (!it->second.empty())
 			return (it->first);
@@ -72,7 +74,8 @@ bool Server::isCGIextension(const std::string &path) const
 	const std::string ext = getExtension(path);
 	for (std::map<std::string, std::string>::const_iterator it
 		 = _cgi_ext_to_path.begin();
-		 it != _cgi_ext_to_path.end(); it++)
+		 it != _cgi_ext_to_path.end();
+		 it++)
 	{
 		if (it->first == ext)
 			return (true);
@@ -95,9 +98,11 @@ const Server::Location &Server::getLocation(const std::string &path) const
 	size_t cmp_diff;
 	size_t cur_diff = ULLONG_MAX;
 	std::map<std::string, Location>::const_iterator result;
-	std::map<std::string, Location>::const_iterator it = _locations.begin();
 
-	for (; it != _locations.end(); ++it)
+	for (std::map<std::string, Location>::const_iterator it
+		 = _locations.begin();
+		 it != _locations.end();
+		 it++)
 	{
 		const std::string location_param = it->first;
 

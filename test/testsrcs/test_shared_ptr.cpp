@@ -43,7 +43,7 @@ int main(void)
 
 	testSimple();
 	testCopy();
-    testAssignment();
+	testAssignment();
 
 	return (0);
 }

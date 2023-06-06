@@ -76,16 +76,19 @@ class Server
 	class ClientNotFound;
 	class InvalidRequest;
 
-	Server(const ConfigContext &server_context, const size_t max_body_size,
+	Server(const ConfigContext &server_context,
+		   const size_t max_body_size,
 		   const unsigned int timeout_ms);
 	~Server();
 
 	// interfaces
 	void task(void);
-	void registerCGIRequest(int client_fd, const Request &request,
+	void registerCGIRequest(int client_fd,
+							const Request &request,
 							const std::string &exec_path,
 							const std::string &resource_path);
-	void registerHTTPRequest(int client_fd, const Request &request,
+	void registerHTTPRequest(int client_fd,
+							 const Request &request,
 							 const Location &location,
 							 const std::string &resource_path);
 	void registerErrorResponseHandler(int client_fd, int method, int code);

@@ -7,8 +7,8 @@ static const int _backlog_size_default = 8;
 bool WebServer::_terminate = false;
 
 WebServer::WebServer(const ConfigContext &root_context)
-	: _backlog_size(_backlog_size_default),
-	  _logger(async::Logger::getLogger("WebServer"))
+	: _backlog_size(_backlog_size_default)
+	, _logger(async::Logger::getLogger("WebServer"))
 {
 	parseMaxBodySize(root_context);
 	parseUploadStore(root_context);

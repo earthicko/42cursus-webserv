@@ -12,10 +12,16 @@ const size_t RequestHandler::pipeThreshold = 1024;
 RequestHandler::RequestHandler(const Request &request,
 							   const std::string &exec_path,
 							   unsigned int timeout_ms)
-	: _request(request), _reader(NULL), _writer(NULL), _exec_path(exec_path),
-	  _pid(-1), _waitpid_status(-1), _status(CGI_RESPONSE_INNER_STATUS_BEGIN),
-	  _timeout_ms(timeout_ms), _timeout(0),
-	  _logger(async::Logger::getLogger("CGIRequestHandler"))
+	: _request(request)
+	, _reader(NULL)
+	, _writer(NULL)
+	, _exec_path(exec_path)
+	, _pid(-1)
+	, _waitpid_status(-1)
+	, _status(CGI_RESPONSE_INNER_STATUS_BEGIN)
+	, _timeout_ms(timeout_ms)
+	, _timeout(0)
+	, _logger(async::Logger::getLogger("CGIRequestHandler"))
 {
 }
 

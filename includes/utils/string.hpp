@@ -54,7 +54,8 @@ inline std::string getExtension(const std::string &filename)
 	return ("");
 }
 
-template <typename T> std::string toStr(T num)
+template <typename T>
+std::string toStr(T num)
 {
 	std::ostringstream ss;
 
@@ -62,7 +63,8 @@ template <typename T> std::string toStr(T num)
 	return (ss.str());
 }
 
-template <typename T> T toNum(std::string &str)
+template <typename T>
+T toNum(std::string &str)
 {
 	T num;
 	std::istringstream ss(str);
@@ -80,7 +82,8 @@ template <typename T> T toNum(std::string &str)
 	return (num);
 }
 
-template <typename T> T toNum(const std::string &str)
+template <typename T>
+T toNum(const std::string &str)
 {
 	T num;
 	std::istringstream ss(str);
@@ -98,7 +101,8 @@ template <typename T> T toNum(const std::string &str)
 	return (num);
 }
 
-template <typename T> T toHexNum(const std::string &str)
+template <typename T>
+T toHexNum(const std::string &str)
 {
 	T num;
 	std::istringstream ss(str);

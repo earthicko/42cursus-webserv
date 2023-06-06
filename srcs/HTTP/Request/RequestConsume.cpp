@@ -29,7 +29,8 @@ static int parseHTTPVersion(const std::string &http_version_str)
 	return (major * 1000 + minor);
 }
 
-int Request::consumeLine(std::string &buffer, std::string &line,
+int Request::consumeLine(std::string &buffer,
+						 std::string &line,
 						 size_t &crlf_pos)
 {
 	crlf_pos = buffer.find(CRLF);
@@ -132,7 +133,8 @@ void Request::consumeHeaderGetNameValue(std::string &header_line,
 	{
 		bool found_name = false;
 		for (std::vector<std::string>::iterator it = _trailer_values.begin();
-			 it != _trailer_values.end(); it++)
+			 it != _trailer_values.end();
+			 it++)
 		{
 			if (*it == name)
 			{
@@ -150,11 +152,10 @@ void Request::consumeHeaderGetNameValue(std::string &header_line,
 
 	const std::string value_part = getbackstr(header_line, colon_pos + 1);
 	values = split(value_part, ",");
-	for (std::vector<std::string>::iterator it = values.begin();
-		 it != values.end(); it++)
+	for (size_t i = 0; i < values.size(); i++)
 	{
-		strtrim(*it, LWS);
-		LOG_DEBUG(__func__ << ": new value \"" << *it << "\"");
+		strtrim(values[i], LWS);
+		LOG_DEBUG(__func__ << ": new value \"" << values[i] << "\"");
 	}
 }
 
